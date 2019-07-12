@@ -11,7 +11,9 @@ app.use( express.static( 'server/public' ) );
 app.use( bodyParser.urlencoded( {extended: true } ));
 
 app.get('/getData', (req, res) => {
-   // display all of the sheets on the console
+   // Display all of the sheets on the console.
+   // Adjust the upper bound of the for loop's condition to the match number of sheets, an error
+   // will display if you choose an upper bound larger than the number of sheets in the file
    for(let currentSheet = 1; currentSheet <= 2; currentSheet++){
       readXlsxFile('server/test_data_3.xlsx', {sheet:currentSheet}).then((rows) => {
          console.log('\n////////////////////////////')
@@ -19,7 +21,7 @@ app.get('/getData', (req, res) => {
          console.log(rows)
       })
    }
-   // send a specific sheet, defined in the second parameter of readXlsxFile()
+   // Send a specific sheet, defined in the second parameter of readXlsxFile()
    readXlsxFile('server/test_data_3.xlsx', {sheet:1}).then((rows) => {
       res.send(rows);
    })
